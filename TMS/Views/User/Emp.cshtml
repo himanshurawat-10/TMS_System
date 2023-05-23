@@ -1,0 +1,28 @@
+﻿@model TMS.Models.User
+@*@{Layout= Views_Shared_EmpLayout}*@
+@{
+    ViewData["Title"] = "Emp";
+}
+
+
+<table class="table">
+
+    <tbody>
+
+    <td>
+            @Html.ActionLink("User", "Index", "User")
+            @Html.ActionLink("Batch", "Index", "Batch")
+            @Html.ActionLink("Course", "Index", "Course")
+
+    </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
