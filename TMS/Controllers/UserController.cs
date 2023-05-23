@@ -22,10 +22,10 @@ namespace TMS.Controllers
         public IActionResult Index()
         {
 
-            ViewBag.Roles = new SelectList(Enum.GetValues(typeof(Role)));
+            //ViewBag.Roles = new SelectList(Enum.GetValues(typeof(Role)));
 
-            ViewData["ManagerId"] = new SelectList(_dbContext.Users.Where(x => (int)x.RoleName == 1), "Id", "UName");
-            return View(_user.GetUser());
+            //ViewData["ManagerId"] = new SelectList(_dbContext.Users.Where(x => (int)x.RoleName == 1), "Id", "UName");
+            return View(_user.GetUserV());
         }
 
         public IActionResult Create()
@@ -97,7 +97,7 @@ namespace TMS.Controllers
                 {
                     return RedirectToAction("Manager");
                 }
-                else if ((int)user.RoleName == 2)
+                else if ((int)user.RoleName == 3)
                 {
                     return RedirectToAction("Admin");
                 }
@@ -121,6 +121,11 @@ namespace TMS.Controllers
         public IActionResult Admin()
         {
             return View();
+        }
+
+        public IActionResult Logoutt()
+        {
+            return RedirectToAction("Validate");
         }
 
     }

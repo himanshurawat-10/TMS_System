@@ -20,6 +20,7 @@ namespace TMS
             builder.Services.AddTransient<IUser, UserRepository>();
             builder.Services.AddTransient<IBatch, BatchRepository>();
             builder.Services.AddTransient<ICourse, CourseRepository>();
+            builder.Services.AddTransient<IRequest, RequestRepository>();
 
 
             var app = builder.Build();

@@ -18,7 +18,8 @@ namespace TMS.Context
         public DbSet<Batch> Batches { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<TMS.Models.BatchViewModel>? BatchViewModel { get; set; }
-        //public DbSet<Request> Requests { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<TMS.Models.RequestViewModel>? RequestViewModel { get; set; }
 
     }
 }

@@ -6,11 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TMS.Migrations
 {
     /// <inheritdoc />
-    public partial class changesdone : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BatchViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BatchName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Trainer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BatchViewModel", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Courses",
                 columns: table => new
@@ -18,6 +35,7 @@ namespace TMS.Migrations
                     CourseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -70,10 +88,47 @@ namespace TMS.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    RequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BatchId = table.Column<int>(type: "int", nullable: false),
+                    UId = table.Column<int>(type: "int", nullable: false),
+                    userUId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.RequestId);
+                    table.ForeignKey(
+                        name: "FK_Requests_Batches_BatchId",
+                        column: x => x.BatchId,
+                        principalTable: "Batches",
+                        principalColumn: "BatchId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Requests_Users_userUId",
+                        column: x => x.userUId,
+                        principalTable: "Users",
+                        principalColumn: "UId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Batches_CourseId",
                 table: "Batches",
                 column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_BatchId",
+                table: "Requests",
+                column: "BatchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_userUId",
+                table: "Requests",
+                column: "userUId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ManagerId",
@@ -84,6 +139,12 @@ namespace TMS.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BatchViewModel");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
             migrationBuilder.DropTable(
                 name: "Batches");
 

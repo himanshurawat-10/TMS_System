@@ -1,4 +1,5 @@
-﻿using TMS.Context;
+﻿using System.Collections;
+using TMS.Context;
 using TMS.Interface;
 using TMS.Models;
 
@@ -32,6 +33,7 @@ namespace TMS.Repository
                         temp.StartDate = batch.StartDate;
                         temp.BatchName = batch.BatchName;
                         temp.Trainer = batch.Trainer;
+                      
                     }
                 }
                 _db.SaveChanges();
@@ -39,7 +41,10 @@ namespace TMS.Repository
             return 1;
         }
 
-
+        public IEnumerable GetBatch()
+        {
+            return _db.Batches.ToList();
+        }
 
         public Batch GetBatchById(int id)
         {
@@ -62,10 +67,16 @@ namespace TMS.Repository
                 Trainer = batch.Trainer,
                 CourseName = course.CourseName,
                 StartDate = batch.StartDate,
-                Description = course.Description
+                Description = course.Description,
+                Duration = course.Duration
             }).ToList();
             return list;
-            //return _db.Batchs.ToList();
+            
         }
+
+       
+       
+
+       
     }
 }

@@ -10,11 +10,6 @@ namespace TMS.Repository
         public CourseRepository(MyDBContext db)
         {
             _db = db;
-
-
-
-
-
         }
         public Course Create(Course course)
         {
@@ -22,10 +17,6 @@ namespace TMS.Repository
             _db.SaveChanges();
             return course;
         }
-
-
-
-
 
         public int Delete(int id)
         {
@@ -69,10 +60,6 @@ namespace TMS.Repository
         {
             return _db.Courses.FirstOrDefault(x => x.CourseId == id);
         }
-
-
-
-
 
         public List<Course> GetCourses()
         {

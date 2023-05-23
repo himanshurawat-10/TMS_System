@@ -67,10 +67,33 @@ namespace TMS.Repository
             return _db.Users.FirstOrDefault(x => x.UId == id);
         }
 
+        public List<UserManagerViewModel> GetUserV()
+        {
+
+            var list = (
+         from user in _db.Users
+         join emp in _db.Users
+         on user.UId equals emp.ManagerId
+
+         select new UserManagerViewModel
+         {
+             UserName = emp.Name,
+             Email = user.Email,
+             ManagerName = user.Name,
+             Role = emp.RoleName
+
+         }).ToList();
+            return list;
+
+        }
+        
+
         public User ValidateUser(string uname, string password)
         {
             return _db.Users.FirstOrDefault( x => x.Email.Equals(uname) && x.Password.Equals(password) );
 
         }
+
+       
     }
 }

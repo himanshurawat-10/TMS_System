@@ -1,24 +1,19 @@
 ﻿@model TMS.Models.User
-@*@{Layout= Views_Shared_EmpLayout}*@
+
 @{
-    ViewData["Title"] = "Emp";
+    ViewData["Title"] = "Manager";
 }
 
+<h1> Manager DashBoard....</h1>
 
-<table class="table">
+<li>
 
-    <tbody>
+    @Html.ActionLink("Create Request","IndexEmployee","Request") ;
+     @Html.ActionLink("Logout","Logoutt","User") ;
 
-    <td>
-            @Html.ActionLink("User", "Index", "User")
-            @Html.ActionLink("Batch", "Index", "Batch")
-            @Html.ActionLink("Course", "Index", "Course")
 
-    </td>
-    </tr>
+</li>
 
-    </tbody>
-</table>
 
 
 @section Scripts {

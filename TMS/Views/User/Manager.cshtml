@@ -1,10 +1,18 @@
 ﻿@model TMS.Models.User
 
 @{
-    ViewData["Title"] = "Emp";
+    ViewData["Title"] = "Manager";
 }
 
-<h1> Hi Iam Manager....</h1>
+<h1> Manager DashBoard....</h1>
+
+<li>
+
+    @Html.ActionLink("View Request","IndexManager","Request") ;
+     @Html.ActionLink("Logout","Logoutt","User") ;
+
+
+</li>
 
 
 

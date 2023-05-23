@@ -1,4 +1,5 @@
-﻿using TMS.Models;
+﻿using System.Collections;
+using TMS.Models;
 
 namespace TMS.Interface
 {
@@ -8,6 +9,6 @@ namespace TMS.Interface
         Batch Create(Batch batch);
         int Edit(int id, Batch batch);
         Batch GetBatchById(int id);
-
+        IEnumerable GetBatch();
     }
 }
